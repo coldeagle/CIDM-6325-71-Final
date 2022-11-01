@@ -1,5 +1,9 @@
 # CIDM-6325-71-Final
 This project will provide the ability to view blog posts and schedule a consolutation with a user listed. 
+
+I am planning on using the domain cidm6325.hardycs.com
+
+I'm planning on using Heroku as my deployment strategy 
 ## User Features
 | Feature | Django Component(s)
 | --------- | --------- |
