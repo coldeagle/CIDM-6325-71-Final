@@ -1,8 +1,5 @@
-/.idea/
-/CIDM_6325_71_FINAL/final_project/db.sqlite3
-/CIDM_6325_71_FINAL/final_project/CIDM_6325_71_FINAL/migrations/
-/Pipfile
-/Pipfile.lock
-/CIDM_6325_71_FINAL/.env
-/.gitignore
-/CIDM_6325_71_FINAL/.venv
+final_project/db.sqlite3
+final_project/CIDM_6325_71_FINAL/migrations/
+.env
+.gitignore
+.venv
