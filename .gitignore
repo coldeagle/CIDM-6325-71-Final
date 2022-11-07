@@ -4,3 +4,5 @@
 /Pipfile
 /Pipfile.lock
 /CIDM_6325_71_FINAL/.env
+/.gitignore
+/CIDM_6325_71_FINAL/.venv
