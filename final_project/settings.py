@@ -41,7 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blog.apps.BlogConfig',
+    'accounts.apps.AccountsConfig',
     'whitenoise.runserver_nostatic',
+    'crispy_forms',
+    'crispy_bootstrap5',
+    'salesforce',
+    'django_wysiwyg',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +63,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'final_project.urls'
+
+DJANGO_WYSIWYG_FLAVOR = "ckeditor"
+
+AUTH_USER_MODEL = "accounts.CustomUser"
 
 TEMPLATES = [
     {
@@ -80,12 +91,24 @@ WSGI_APPLICATION = 'final_project.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    "default": env.dj_db_url('DATABASE_URL', default='sqlite:///db.sqlite3')
+    "default": env.dj_db_url('DATABASE_URL', default='sqlite:///db.sqlite3'),
+    'salesforce': {
+        'ENGINE': 'salesforce.backend',
+        'CONSUMER_KEY': env('SFDC_CONSUMER_KEY', default='create .env file with key SFDC_CONSUMER_KEY='),
+        'CONSUMER_SECRET': env('SFDC_CONSUMER_SECRET', default='create .env file with key SFDC_CONSUMER_SECRET='),
+        'USER': env('SFDC_USER_NAME', default='create .env file with key SFDC_USER_NAME='),
+        'PASSWORD': env('SFDC_PASSWORD', default='create .env file with key SFDC_PASSWORD='),
+        'HOST': env('SFDC_HOST', default='create .env file with key SFDC_HOST='),
+    }
     #'default': {
     #    'ENGINE': 'django.db.backends.sqlite3',
     #    'NAME': BASE_DIR / 'db.sqlite3',
     #}
 }
+
+DATABASE_ROUTERS = [
+    'salesforce.router.ModelRouter'
+]
 
 
 # Password validation
@@ -112,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Los_Angeles'
 
 USE_I18N = True
 
@@ -131,3 +154,12 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
