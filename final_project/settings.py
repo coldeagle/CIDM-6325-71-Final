@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from environs import Env
+from django.urls import reverse_lazy
 
 env = Env()
 env.read_env()
@@ -35,6 +36,7 @@ ALLOWED_HOSTS = env.list('HOSTS', default='127.0.0.1')
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,12 +45,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'accounts.apps.AccountsConfig',
+    'contact_us.apps.ContactUsConfig',
     'whitenoise.runserver_nostatic',
     'crispy_forms',
     'crispy_bootstrap5',
     'salesforce',
+    'rest_framework',
+    'loginas',
     'django_wysiwyg',
     'ckeditor',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'final_project.urls'
@@ -80,12 +87,24 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':{
+                'custom_tags': 'final_project.custom_tags',
+
+            }
         },
     },
 ]
 
 WSGI_APPLICATION = 'final_project.wsgi.application'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', 'root@someplace.com')
+EMAIL_HOST = env('EMAIL_HOST', default='smtp.someplace.com')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='root@somplace.com')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PW', default='password')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -129,6 +148,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -163,3 +186,10 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+# This will only allow admins to log in as other users:
+CAN_LOGIN_AS = lambda request, target_user: request.user.is_superuser
+#LOGINAS_REDIRECT_URL = '/loginas-redirect-url'
+LOGOUT_URL = reverse_lazy('loginas-logout')
+LOGINAS_LOGOUT_REDIRECT_URL = reverse_lazy('admin:index')
+LOGINAS_UPDATE_LAST_LOGIN = True

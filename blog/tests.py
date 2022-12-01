@@ -53,7 +53,10 @@ class BlogTests(TestCase):
         self.assertContains(response, "A good title")
         self.assertTemplateUsed(response, "post_detail.html")
 
-    def test_post_createview(self):  
+    def test_post_createview(self):
+
+        login = self.client.login(username='testuser', password='secret')
+        self.assertTrue(login)
         response = self.client.post(
             reverse("post_new"),
             {
@@ -66,7 +69,10 @@ class BlogTests(TestCase):
         self.assertEqual(Post.objects.last().title, "New title")
         self.assertEqual(Post.objects.last().body, "New text")
         
-    def test_post_updateview(self):  
+    def test_post_updateview(self):
+
+        login = self.client.login(username='testuser', password='secret')
+        self.assertTrue(login)
         response = self.client.post(
             reverse("post_edit", args="1"),
             {

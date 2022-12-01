@@ -19,10 +19,13 @@ from django.urls import path, include
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('admin/', include('loginas.urls')),
     path('admin/', admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
     path("accounts/", include("accounts.urls")),
+    path("contact_us/", include("contact_us.urls")),
     path("", include("blog.urls")),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
 
 if settings.DEBUG:

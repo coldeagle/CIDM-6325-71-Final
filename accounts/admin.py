@@ -13,9 +13,13 @@ class CustomUserAdmin(UserAdmin):
         "username",
         "age",
         "is_staff",
+        "sfdc_username",
+        "company_name",
+        "phone_number",
     ]
-    fieldsets = UserAdmin.fieldsets + ((None, {"fields": ("age",)}),)
-    add_fieldsets = UserAdmin.add_fieldsets + ((None, {"fields": ("age",)}),)
+    fieldsets = UserAdmin.fieldsets + ((None, {"fields": ("age", "sfdc_username", "company_name", "phone_number",)}),)
+    add_fieldsets = UserAdmin.add_fieldsets + ((None, {"fields": ("age", "sfdc_username", "company_name", "phone_number",)}),)
+    change_form_template = 'loginas/change_form.html'
 
 
 admin.site.register(CustomUser, CustomUserAdmin)

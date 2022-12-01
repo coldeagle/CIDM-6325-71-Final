@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load custom_tags %}
+{% block title %}Select Date and Time{% endblock title %}
+{% block content %}
+<div class="row pb-4">
+    <h2>Available Time Slots</h2>
+    <!--<div class="accordion" id="dates_available">-->
+
+        {% for availDay in response_json.availableDates %}
+            <div class="row pb-1    ">
+                <div class="col-12">
+                    {{ availDay.day }}
+                    <ul>
+
+                        {% for availTime in availDay.availableTimes %}
+
+                        <li><a href="{% url 'book_date' %}?scheduledDate={{availDay.day}}&startTime={{availTime.startTime}}&endTime={{availTime.endTime}}">Starting at: {{ availTime.startTime }} and Ending at: {{ availTime.endTime }}</a></li>
+
+                        {% endfor %}
+                    </ul>
+                </div>
+
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
