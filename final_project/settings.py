@@ -194,4 +194,4 @@ LOGOUT_URL = reverse_lazy('loginas-logout')
 LOGINAS_LOGOUT_REDIRECT_URL = reverse_lazy('admin:index')
 LOGINAS_UPDATE_LAST_LOGIN = True
 
-CSRF_TRUSTED_ORIGINS= env.str('CSRF_TRUSTED_ORIGINS', default='https://127.0.0.1')
+CSRF_TRUSTED_ORIGINS= env.list('CSRF_TRUSTED_ORIGINS', default='[https://127.0.0.1]')
