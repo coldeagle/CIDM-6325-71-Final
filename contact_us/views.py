@@ -40,11 +40,10 @@ class SelectDayAndTime(TemplateView):
         return context
 
 
-
 class GetContactInfoAndConfirm(FormView):
     form_class = GetContactInfo
     template_name = 'contact_us/confirmation.html'
-    success_url = '/'
+    success_url = 'scheduled'
 
     def get_initial(self):
         initial = super().get_initial()
@@ -62,12 +61,12 @@ class GetContactInfoAndConfirm(FormView):
             company_name = user.company_name
             phone_number = user.phone_number
 
-        initial['scheduledDate']=self.request.GET.get('scheduledDate')
-        initial['scheduleTime']=self.request.GET.get('startTime')
-        initial['firstName']=first_name
-        initial['lastName']=last_name
-        initial['email']=email
-        initial['company']=company_name
+        initial['scheduledDate'] = self.request.GET.get('scheduledDate')
+        initial['scheduleTime'] = self.request.GET.get('startTime')
+        initial['firstName'] = first_name
+        initial['lastName'] = last_name
+        initial['email'] = email
+        initial['company'] = company_name
 
         isTestOnly = self.request.GET.get('IsTestOnly')
         if not isTestOnly == None:
@@ -102,6 +101,10 @@ class GetContactInfoAndConfirm(FormView):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
+
+
+class ScheduledView(TemplateView):
+    template_name = 'contact_us/event_scheduled.html'
 
 
 class DecimalEncoder(json.JSONEncoder):
