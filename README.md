@@ -7,7 +7,7 @@ I'm planning on using Heroku as my deployment strategy
 ## User Features
 | Feature | Django Component(s)
 | --------- | --------- |
-| a) View Blog Entries | Templates, Template Inheritance, Views, Class-Based Views, URLs, Routing, Model Classes, Tests, Static Files, Queries, Postgres, bootstrap, Custom templates, heroku deployment, static assets with ngnix and whitenoise, ssl, task scheduling, CI/CD, Model Enhancements, Views, Search |
+| a) View Blog Entries | Templates, Template Inheritance, Views, Class-Based Views, URLs, Routing, Model Classes, Tests, Static Files, Queries, Postgres, bootstrap, Custom templates, heroku deployment, static assets with ngnix and whitenoise, ssl, CI/CD, Model Enhancements, Views, Search |
 | b) Submit Forms (including articles) | Templates, Template Inheritance, Views, Class-Based Views, URLs, Routing, Model Classes, Tests, Static Files, class-based form, authentication, Postgres, custom user models, ad hoc forms, bootstrap, Custom templates, Account management, email, django_crispy_forms, authorization, ManyToMany rels, heroku deployment, ssl, CI/CD, Model Enhancements, Users and SSO, Views, Search |
 | c) Register/Auth | Templates, Template Inheritance, Views, Class-Based Views, URLs, Routing, Model Classes, Tests, Static Files, Queries, class-based form, authentication, Postgres, custom user models, ad hoc forms, bootstrap, Custom templates, Account management, email, django_crispy_forms, authorization, heroku deployment,  ssl, CI/CD, APIs, Model Enhancements, Users and SSO, Views |
 | d) Submit Request For Appointment | Templates, Template Inheritance, Views, Class-Based Views, URLs, Routing, Model Classes, Tests, Static Files, Queries, class-based form, authentication, Postgres, custom user models, ad hoc forms, bootstrap, Custom templates, django_crispy_forms, authorization, heroku deployment, ssl, middleware, CI/CD, APIs, Model Enhancements, Views |
@@ -42,7 +42,6 @@ I'm planning on using Heroku as my deployment strategy
 | a             | static assets with ngnix and whitenoise |           | x     |         |
 | a, b, c, d, e | SSL                                     | x         |       |         |
 | d             | Custom middleware                       |           |       | x       |
-| a             | Task scheduling with cron               |           | x     | x       |
 | a, b, c, d, e | CI/CD with Github                       |           |       |         | x
 |***3rd Party***                         |           |       |         |
 | e             | [Django admin](https://github.com/wsvincent/awesome-django#admin) | | | | x
