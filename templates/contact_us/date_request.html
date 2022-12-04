@@ -4,8 +4,13 @@
 {% block title %}When would you like to meet?{% endblock title %}
 
 {% block content %}
-    <form method="post">{% csrf_token %}
-        {{ form | crispy }}
-        <button type="submit" class="btn btn-success ml-2">Submit</button>
-    </form>
+
+    <h2 class="blog-post-title mb-1">Let's get started</h2>
+    <hr>
+    <div class="row">
+        <form method="post">{% csrf_token %}
+            {{ form | crispy }}
+            <button type="submit" class="btn btn-success ml-2">Submit</button>
+        </form>
+    </div>
 {% endblock content %}

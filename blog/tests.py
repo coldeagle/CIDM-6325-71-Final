@@ -54,20 +54,7 @@ class BlogTests(TestCase):
         self.assertTemplateUsed(response, "post_detail.html")
 
     def test_post_createview(self):
-
-        login = self.client.login(username='testuser', password='secret')
-        self.assertTrue(login)
-        response = self.client.post(
-            reverse("post_new"),
-            {
-                "title": "New title",
-                "body": "New text",
-                "author": self.user.id,
-            },
-        )
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(Post.objects.last().title, "New title")
-        self.assertEqual(Post.objects.last().body, "New text")
+        self.login_and_create_article()
         
     def test_post_updateview(self):
 
@@ -87,3 +74,27 @@ class BlogTests(TestCase):
     def test_post_deleteview(self):  
         response = self.client.post(reverse("post_delete", args="1"))
         self.assertEqual(response.status_code, 302)
+
+    def test_post_search(self):
+        self.login_and_create_article()
+        response = self.client.get('/search_posts/?q=New')
+        print (response.status_code)
+        self.assertEqual(response.status_code, 200)
+        self.assertGreaterEqual(len(response.context['object_list']), 1)
+        self.assertEqual(response.context['q'], 'New')
+        self.assertTemplateUsed(response, "posts.html")
+
+    def login_and_create_article(self):
+        login = self.client.login(username='testuser', password='secret')
+        self.assertTrue(login)
+        response = self.client.post(
+            reverse("post_new"),
+            {
+                "title": "New title",
+                "body": "New text",
+                "author": self.user.id,
+            },
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Post.objects.last().title, "New title")
+
